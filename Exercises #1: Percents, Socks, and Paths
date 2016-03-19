@@ -1,0 +1,98 @@
+Ben McGahee
+HackerRank Exercises #1
+3/19/2016
+
+#1. Fill a random list of numbers varying in signs and calculate the percent
+#of zero, positive, and negative numbers in the list.  
+ 
+def percentSigns(size, minimum, maximum):
+    import random
+    numberList = []
+
+    if size <= 0:
+        print "Size needs to be a positive value."
+    elif minimum >= maximum:
+        print "Minimum value must be less than maximum value."
+    else:
+        #Place random numbers between minimum and maximum values into the list.
+        for i in range(0, size):
+            value = random.randint(minimum, maximum)
+            numberList.append(value)
+    
+        countZero = 0
+        countPositive = 0
+        countNegative = 0
+
+        #Case 1:  If number in list is 0, add 1 to the zero count.
+        #Case 2:  If number in the list is positive, add 1 to the positive count.
+        #Case 3:  If number in the list is negative, add 1 to the negative count.
+        for j in range(0, size):
+            if numberList[j] == 0:
+                countZero += 1.0
+            elif numberList[j] > 0:
+                countPositive += 1.0
+            else:
+                countNegative += 1.0
+  
+        #Get the ratios for the zero, positive, and negative counts in relation to the size of the list. 
+        zeroFraction = countZero / size
+        positiveFraction = countPositive / size
+        negativeFraction = countNegative / size
+
+        #Convert the ratios to percents and round to two decimal places.
+        percentZero = round(zeroFraction * 100, 2)
+        percentPositive = round(positiveFraction * 100, 2)
+        percentNegative = round(negativeFraction * 100, 2)
+
+        #Print the number list and the zero, positive, and negative percent results.  
+        print numberList 
+        print "Percent Zero: " + str(percentZero) + "%"
+        print "Percent Positive: " + str(percentPositive) + "%"
+        print "Percent Negative: " + str(percentNegative) + "%"
+
+#2. Given a certain number of pairs of socks from a drawer where each pair has a different color,
+#find the minimum number of socks needed to pull out of the drawer to get a matching pair.
+#Indicate the number of tests you want to run.
+
+def minSocks(tests):
+    import random
+
+    if tests <= 0:
+        print "No result"
+    else:
+        for t in range(1, tests + 1):
+            pairs = random.randint(1, 100)
+            socks = pairs + 1
+            print "Test #" + str(t) + " " + str(pairs) + " pairs " + str(socks) + " socks"
+
+#3. Given a starting pointing (a, b) and an ending point (x, y), you need to determine if you can get to (x, y)
+#by doing one of the following operations:  (a + b, b), (a - b, b), (a, a + b), or (a, a - b).
+
+def possiblePath(startX, startY, endX, endY):
+    #Define the four possible operations.
+    moveRightX = startX + startY
+    moveLeftX = startX - startY
+    moveUpY = startX + startY
+    moveDownY = startX - startY
+
+    #Store those operations in the corresponding tuples.
+    pointRight = (moveRightX, startY)
+    pointLeft = (moveLeftX, startY)
+    pointUp = (startX, moveUpY)
+    pointDown = (startX, moveDownY)
+
+    #The point (x, y) you want to reach.
+    targetPoint = (endX, endY)
+
+    #If any of the four operations gets you from point (a, b) to point (x, y) then yes, it's possible.
+    #Otherwise, it's impossible to reach (x, y).
+    if pointRight == targetPoint or pointLeft == targetPoint or pointUp == targetPoint or pointDown == targetPoint:
+        print "YES"
+    else:
+        print "NO"
+
+
+
+
+
+
