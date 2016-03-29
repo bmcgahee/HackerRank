@@ -1,0 +1,58 @@
+#Author: Ben McGahee
+#Title: Strings Module
+#Date: 3/28/2016
+#Purpose:  The Strings module lets you find a substring of a given string, rotate a string a certain number of units left or right,
+#and swap the last two chracters in a string of length 3.  These functions were used to find the possible permutations of 
+#three digit numbers.
+
+#substring() function finds the substring (if one exists) from a starting index to an ending index.  
+def substring(string, start, end):
+    #Case where the user inputs start and end values that are out of bounds.
+    if start > end or start < 0 or start >= len(string) or end < 0 or end >= len(string):
+        print "error: can't find substring of " + string
+    else:
+        #Create empty string and iterate through given string from start to finish
+        #and add each character on the string to get the substring.
+        sub = ""
+        finish = end + 1
+        for i in range(start, finish):
+            sub += string[i]
+        return sub
+
+#rotateString() function takes in a given string and shift value to rotate the string a certain number of units to the left or right.
+#If shift = 0, there is no rotation.
+#If shift > 0, there is a rotation to the right.
+#If shift < 0, there is a rotation to the left.
+def rotateString(string, shift):
+    #Concatenate the string with itself.
+    doubleString = string + string
+    #Remainder of shift divided by string length is the shift factor.
+    shiftFactor = shift % len(string)
+    #Where the string begins.
+    stringStart = len(string) - shiftFactor
+    #Where the string ends.
+    doubleStringEnd = len(doubleString) - shiftFactor - 1
+    #Use substring() function to complete the rotation of the concatenated string.
+    rotString = substring(doubleString, stringStart, doubleStringEnd)
+    return rotString
+
+#swapLastTwo() function takes a string of length 3, and swaps the last two characters.
+def swapLastTwo(string):
+    #Length of string.
+    size = len(string)
+    #Create empty string for for loop.
+    result = ""
+    #Start with last character and append the last two chracters to empty string.
+    for i in range(size - 1, 0, -1):
+        result += string[i]
+    #Attach the first chracter in front to get resulting string.
+    attach = string[0]
+    final = attach + result
+    return final
+
+    
+    
+
+        
+    
+
