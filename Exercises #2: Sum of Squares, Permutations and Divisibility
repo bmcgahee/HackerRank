@@ -1,0 +1,98 @@
+Ben McGahee
+HackerRank Exercises #2
+3/28/2016
+
+#1: Find the largest value of n where the sum of 1^2 + 2^2 + 3^2 + ... + n^2 is less than K, where K >= 100.
+#What is the maximum sum that is less than K?
+
+#sumOfSquares function takes in a value of K >= 100 and finds the maximum sum and number of terms required to achieve the sum
+#that is less than K.  
+def sumOfSquares(K):
+    #While loop executes if the user enters a number less than 100.
+    while K < 100:
+        K = int(raw_input("Enter a value of K greater than or equal to 100: "))
+    #Initialize sum of squares, n variables and the lists to store the sum of squares and values of n.
+    squareSum = 1
+    n = 2
+    squareBucket = []
+    nBucket = []
+
+    #While loop executes while the sum is less than K and appends the sums and n values into their corresponding lists
+    #Value of n is incremented by 1.
+    while squareSum < K:
+        squareSum += n*n
+        squareBucket.append(squareSum)
+        nBucket.append(n)
+        n += 1
+
+    #Lenghts of squares and n lists.
+    sizeSquareBucket = len(squareBucket)
+    sizeNBucket = len(nBucket)
+
+    #Case where the sum of squares is equal to or exceeds the value of K:
+    #Set the maximum sum to be the next to the last item in the list.
+    #Set maximum number of terms as the next to the last item in that list.
+    if squareBucket[sizeSquareBucket - 1] >= K:
+        maxSquareSum = squareBucket[sizeSquareBucket - 2]
+        maxNTerms = nBucket[sizeNBucket - 2]
+
+    #Print the maximum sum less than K and the number of terms needed to get this sum.
+    print "The maximum sum less than " + str(K) + " is: " + str(maxSquareSum)
+    print "The maximum number of terms to achieve this sum is: " + str(maxNTerms)
+
+#2 List all the possible permutations of a three digit number and determine which numbers are divisible by 8.
+
+#permDivByEight takes any three digit number between 100 and 999, finds all of its permutations, and determines which number(s)
+#in the set are divisible by 8.
+
+def permDivByEight(number):
+    #Import all functions from the strings module.  
+    #This module is in a different file.
+    from strings import *
+
+    #Convert number to string.
+    stringNumber = str(number)
+
+    #While loop executes if user enters number less than 100 or greater than or equal to 1000.
+    while number < 100 or number >= 1000:
+        number = int(raw_input("Enter a number between 100 and 999: "))
+        stringNumber = str(number)
+    
+    #Permutations take place here with using the swapLastTwo() and rotateString() functions.
+    permuteNumberOne = swapLastTwo(stringNumber)
+    permuteNumberTwo = rotateString(stringNumber, 2)
+    permuteNumberThree = swapLastTwo(permuteNumberTwo)
+    permuteNumberFour = rotateString(stringNumber, 1)
+    permuteNumberFive = swapLastTwo(permuteNumberFour)
+
+    #Values above are converted into integers.
+    permNumOne = int(permuteNumberOne)
+    permNumTwo = int(permuteNumberTwo)
+    permNumThree = int(permuteNumberThree)
+    permNumFour = int(permuteNumberFour)
+    permNumFive = int(permuteNumberFive)
+
+    #Numbers are stored in a list.
+    permutations = [number, permNumOne, permNumTwo, permNumThree, permNumFour, permNumFive]
+    
+    #The empty divisible by eight list is initialized.
+    divByEight = []
+
+    #Iterate through all of the permutations in the list and see if any of them are divisible by 8.
+    #The numbers that are divisible by 8 are appended to the divByEight list.
+    for perm in permutations:
+        if perm % 8 == 0:
+            divByEight.append(perm)
+
+    #Prints out the possible permutations of the given number, and the number(s) that are divisible by 8.
+    print "Here are the possible permutations of the number " + stringNumber + "."
+    print permutations
+    print "The number(s) that are divisible by 8: "
+    print divByEight
+
+
+
+
+
+        
+    
